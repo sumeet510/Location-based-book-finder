@@ -1,0 +1,14 @@
+import urllib2
+import json
+address=raw_input()
+address=address.replace(" ","+")
+googleapiurl="https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&key=AIzaSyAA5qkImojtSI-7nubYmT6xzvcg80jkV5w"
+response=urllib2.urlopen(googleapiurl)
+data=json.load(response)
+lat=data['results'][0]['geometry']['location']['lat']
+lon=data['results'][0]['geometry']['location']['lng']
+url="https://www.mappit.net/bookmap/apis/?lat="+str(lat)+"&lon="+str(lon)
+response=urllib2.urlopen(url)
+data=json.load(response)
+for i in data:
+    print i['title'].encode('ascii','ignore')
